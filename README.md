@@ -1,5 +1,5 @@
 # Nettigo Air Monitor 2 JSON consumer
-pho page that consumes the data provided by a [Nettigo Air Monitor 2](https://nettigo.eu/products/nettigo-air-monitor-kit-0-3-2-build-your-own-smog-sensor)
+php page that consumes the data provided by a [Nettigo Air Monitor 2](https://nettigo.eu/products/nettigo-air-monitor-kit-0-3-2-build-your-own-smog-sensor)
 python module to interact and read data from C.M.I. logger from [Technische Alternative](https://www.ta.co.at)
 
 ## local testing
