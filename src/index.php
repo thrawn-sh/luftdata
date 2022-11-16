@@ -65,15 +65,15 @@ if (WRITE_SQL_FILE) {
     $sql = str_replace(':time',             "'" . $now . "'",                                     $sql);
     $sql = str_replace(':sensor_id',        "'" . $json['esp8266id'] . "'",                       $sql);
     $sql = str_replace(':firmware',         "'" . $json['software_version'] . "'",                $sql);
-    $sql = str_replace(':bmp_pressure',     "'" . $sensor_data_values['BMP_pressure'] . "'",      $sql); 
-    $sql = str_replace(':bmp_temperature',  "'" . $sensor_data_values['BMP_temperature'] . "'",   $sql); 
-    $sql = str_replace(':heca_humidity',    "'" . $sensor_data_values['HECA_humidity'] . "'",     $sql); 
-    $sql = str_replace(':heca_temperature', "'" . $sensor_data_values['HECA_temperature'] . "'",  $sql); 
-    $sql = str_replace(':pm_10',            "'" . $sensor_data_values['SDS_P1'] . "'",            $sql); 
-    $sql = str_replace(':pm_25',            "'" . $sensor_data_values['SDS_P2'] . "'",            $sql); 
-    $sql = str_replace(':sht_humidity',     "'" . $sensor_data_values['SHT3X_humidity'] . "'",    $sql); 
+    $sql = str_replace(':bmp_pressure',     "'" . $sensor_data_values['BMP_pressure'] . "'",      $sql);
+    $sql = str_replace(':bmp_temperature',  "'" . $sensor_data_values['BMP_temperature'] . "'",   $sql);
+    $sql = str_replace(':heca_humidity',    "'" . $sensor_data_values['HECA_humidity'] . "'",     $sql);
+    $sql = str_replace(':heca_temperature', "'" . $sensor_data_values['HECA_temperature'] . "'",  $sql);
+    $sql = str_replace(':pm_10',            "'" . $sensor_data_values['SDS_P1'] . "'",            $sql);
+    $sql = str_replace(':pm_25',            "'" . $sensor_data_values['SDS_P2'] . "'",            $sql);
+    $sql = str_replace(':sht_humidity',     "'" . $sensor_data_values['SHT3X_humidity'] . "'",    $sql);
     $sql = str_replace(':sht_temperature',  "'" . $sensor_data_values['SHT3X_temperature'] . "'", $sql);
-    $sql = str_replace(':wifi_signal',      "'" . $sensor_data_values['signal'] . "'",            $sql); 
+    $sql = str_replace(':wifi_signal',      "'" . $sensor_data_values['signal'] . "'",            $sql);
 
     if (!fwrite($fd, $sql . ';' . PHP_EOL)) {
         http_response_code(500); // Internal Server Error
