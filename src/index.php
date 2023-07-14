@@ -1,7 +1,7 @@
 <?php
-const WRITE_SQL_FILE = true;
-const DATABASE_INI = '../database.ini';
-const SQL_FOLDER = '../sql';
+const WRITE_SQL_FILE = getenv('WRITE_SQL_FILE') ?: true;
+const DATABASE_INI = getenv('DATABASE_INI') ?: '../database.ini';
+const SQL_FOLDER = getenv('SQL_FOLDER') ?: '../sql';
 
 function connect_db($file) {
     $db = parse_ini_file($file);
