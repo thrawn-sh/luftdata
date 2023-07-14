@@ -38,7 +38,10 @@ foreach ($json['sensordatavalues'] as $measure) {
     $sensor_data_values[$measure['value_type']] = $measure['value'];
 }
 
-$statement = 'INSERT INTO measurement (time, sensor_id, firmware, bmp_pressure, bmp_temperature, heca_humidity, heca_temperature, pm_10, pm_25, sht_humidity, sht_temperature, wifi_signal) VALUES(:time, :sensor_id, :firmware, :bmp_pressure, :bmp_temperature, :heca_humidity, :heca_temperature, :pm_10, :pm_25, :sht_humidity, :sht_temperature, :wifi_signal) ON CONFLICT (time, sensor_id) DO NOTHING';
+$statement  = 'INSERT INTO measurement ';
+$statement .= '(time, sensor_id, firmware, bmp_pressure, bmp_temperature, heca_humidity, heca_temperature, pm_10, pm_25, sht_humidity, sht_temperature, wifi_signal) ';
+$statement .= 'VALUES(:time, :sensor_id, :firmware, :bmp_pressure, :bmp_temperature, :heca_humidity, :heca_temperature, :pm_10, :pm_25, :sht_humidity, :sht_temperature, :wifi_signal)';
+$statement .= 'ON CONFLICT (time, sensor_id) DO NOTHING';
 $insert = $pdo->prepare($statement);
 $insert->bindValue(':time',             $now,                                                      PDO::PARAM_STR);
 $insert->bindValue(':sensor_id',        $json['esp8266id'],                                        PDO::PARAM_INT);
