@@ -73,7 +73,7 @@ if (WRITE_SQL_FILE) {
     $sql = str_replace(':heca_humidity',    "'" . floatval($sensor_data_values['HECA_humidity'] ?? -1) . "'",      $sql);
     $sql = str_replace(':heca_temperature', "'" . floatval($sensor_data_values['HECA_temperature'] ?? -99) . "'",  $sql);
     $sql = str_replace(':pm_10',            "'" . floatval($sensor_data_values['SDS_P1'] ?? -1) . "'",             $sql);
-    $sql = str_replace(':pm_25',            "'" . floatval($sensor_data_values['SDS_P2']) ?? -1. "'",              $sql);
+    $sql = str_replace(':pm_25',            "'" . floatval($sensor_data_values['SDS_P2'] ?? -1) . "'",             $sql);
     $sql = str_replace(':sht_humidity',     "'" . floatval($sensor_data_values['SHT3X_humidity'] ?? -1) . "'",     $sql);
     $sql = str_replace(':sht_temperature',  "'" . floatval($sensor_data_values['SHT3X_temperature'] ?? -99) . "'", $sql);
     $sql = str_replace(':wifi_signal',      "'" . floatval($sensor_data_values['signal'] ?? -1) . "'",             $sql);
