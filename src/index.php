@@ -40,18 +40,18 @@ foreach ($json['sensordatavalues'] as $measure) {
 
 $statement = 'INSERT INTO measurement (time, sensor_id, firmware, bmp_pressure, bmp_temperature, heca_humidity, heca_temperature, pm_10, pm_25, sht_humidity, sht_temperature, wifi_signal) VALUES(:time, :sensor_id, :firmware, :bmp_pressure, :bmp_temperature, :heca_humidity, :heca_temperature, :pm_10, :pm_25, :sht_humidity, :sht_temperature, :wifi_signal) ON CONFLICT (time, sensor_id) DO NOTHING';
 $insert = $pdo->prepare($statement);
-$insert->bindValue(':time',             $now,                                               PDO::PARAM_STR);
-$insert->bindValue(':sensor_id',        $json['esp8266id'],                                 PDO::PARAM_INT);
-$insert->bindValue(':firmware',         $json['software_version'],                          PDO::PARAM_STR);
-$insert->bindValue(':bmp_pressure',     floatval($sensor_data_values['BMP_pressure']),      PDO::PARAM_INT);
-$insert->bindValue(':bmp_temperature',  floatval($sensor_data_values['BMP_temperature']),   PDO::PARAM_INT);
-$insert->bindValue(':heca_humidity',    floatval($sensor_data_values['HECA_humidity']),     PDO::PARAM_INT);
-$insert->bindValue(':heca_temperature', floatval($sensor_data_values['HECA_temperature']),  PDO::PARAM_INT);
-$insert->bindValue(':pm_10',            floatval($sensor_data_values['SDS_P1']),            PDO::PARAM_INT);
-$insert->bindValue(':pm_25',            floatval($sensor_data_values['SDS_P2']),            PDO::PARAM_INT);
-$insert->bindValue(':sht_humidity',     floatval($sensor_data_values['SHT3X_humidity']),    PDO::PARAM_INT);
-$insert->bindValue(':sht_temperature',  floatval($sensor_data_values['SHT3X_temperature']), PDO::PARAM_INT);
-$insert->bindValue(':wifi_signal',      floatval($sensor_data_values['signal']),            PDO::PARAM_INT);
+$insert->bindValue(':time',             $now,                                                      PDO::PARAM_STR);
+$insert->bindValue(':sensor_id',        $json['esp8266id'],                                        PDO::PARAM_INT);
+$insert->bindValue(':firmware',         $json['software_version'],                                 PDO::PARAM_STR);
+$insert->bindValue(':bmp_pressure',     floatval($sensor_data_values['BMP_pressure'] ?? -99),      PDO::PARAM_INT);
+$insert->bindValue(':bmp_temperature',  floatval($sensor_data_values['BMP_temperature'] ?? -99),   PDO::PARAM_INT);
+$insert->bindValue(':heca_humidity',    floatval($sensor_data_values['HECA_humidity'] ?? -1),      PDO::PARAM_INT);
+$insert->bindValue(':heca_temperature', floatval($sensor_data_values['HECA_temperature'] ?? -99),  PDO::PARAM_INT);
+$insert->bindValue(':pm_10',            floatval($sensor_data_values['SDS_P1'] ?? -1),             PDO::PARAM_INT);
+$insert->bindValue(':pm_25',            floatval($sensor_data_values['SDS_P2'] ?? -1),             PDO::PARAM_INT);
+$insert->bindValue(':sht_humidity',     floatval($sensor_data_values['SHT3X_humidity'] ?? -1),     PDO::PARAM_INT);
+$insert->bindValue(':sht_temperature',  floatval($sensor_data_values['SHT3X_temperature'] ?? -99), PDO::PARAM_INT);
+$insert->bindValue(':wifi_signal',      floatval($sensor_data_values['signal'] ?? -1),             PDO::PARAM_INT);
 
 if (WRITE_SQL_FILE) {
     $file = SQL_FOLDER . '/sensor-' . date('Y-m-d') . '.sql';
@@ -62,18 +62,18 @@ if (WRITE_SQL_FILE) {
     }
 
     $sql = $statement;
-    $sql = str_replace(':time',             "'" . $now . "'",                                               $sql);
-    $sql = str_replace(':sensor_id',        "'" . $json['esp8266id'] . "'",                                 $sql);
-    $sql = str_replace(':firmware',         "'" . $json['software_version'] . "'",                          $sql);
-    $sql = str_replace(':bmp_pressure',     "'" . floatval($sensor_data_values['BMP_pressure']) . "'",      $sql);
-    $sql = str_replace(':bmp_temperature',  "'" . floatval($sensor_data_values['BMP_temperature']) . "'",   $sql);
-    $sql = str_replace(':heca_humidity',    "'" . floatval($sensor_data_values['HECA_humidity']) . "'",     $sql);
-    $sql = str_replace(':heca_temperature', "'" . floatval($sensor_data_values['HECA_temperature']) . "'",  $sql);
-    $sql = str_replace(':pm_10',            "'" . floatval($sensor_data_values['SDS_P1']) . "'",            $sql);
-    $sql = str_replace(':pm_25',            "'" . floatval($sensor_data_values['SDS_P2']) . "'",            $sql);
-    $sql = str_replace(':sht_humidity',     "'" . floatval($sensor_data_values['SHT3X_humidity']) . "'",    $sql);
-    $sql = str_replace(':sht_temperature',  "'" . floatval($sensor_data_values['SHT3X_temperature']) . "'", $sql);
-    $sql = str_replace(':wifi_signal',      "'" . floatval($sensor_data_values['signal']) . "'",            $sql);
+    $sql = str_replace(':time',             "'" . $now . "'",                                                      $sql);
+    $sql = str_replace(':sensor_id',        "'" . $json['esp8266id'] . "'",                                        $sql);
+    $sql = str_replace(':firmware',         "'" . $json['software_version'] . "'",                                 $sql);
+    $sql = str_replace(':bmp_pressure',     "'" . floatval($sensor_data_values['BMP_pressure'] ?? -99) . "'",      $sql);
+    $sql = str_replace(':bmp_temperature',  "'" . floatval($sensor_data_values['BMP_temperature'] ?? -99) . "'",   $sql);
+    $sql = str_replace(':heca_humidity',    "'" . floatval($sensor_data_values['HECA_humidity'] ?? -1) . "'",      $sql);
+    $sql = str_replace(':heca_temperature', "'" . floatval($sensor_data_values['HECA_temperature'] ?? -99) . "'",  $sql);
+    $sql = str_replace(':pm_10',            "'" . floatval($sensor_data_values['SDS_P1'] ?? -1) . "'",             $sql);
+    $sql = str_replace(':pm_25',            "'" . floatval($sensor_data_values['SDS_P2']) ?? -1. "'",              $sql);
+    $sql = str_replace(':sht_humidity',     "'" . floatval($sensor_data_values['SHT3X_humidity'] ?? -1) . "'",     $sql);
+    $sql = str_replace(':sht_temperature',  "'" . floatval($sensor_data_values['SHT3X_temperature'] ?? -99) . "'", $sql);
+    $sql = str_replace(':wifi_signal',      "'" . floatval($sensor_data_values['signal'] ?? -1) . "'",             $sql);
 
     if (!fwrite($fd, $sql . ';' . PHP_EOL)) {
         http_response_code(500); // Internal Server Error
