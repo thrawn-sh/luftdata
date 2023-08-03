@@ -29,7 +29,10 @@ $> php --docroot="${PWD}/src" --server="127.0.0.1:8080"
 $> curl --data "@${PWD}/example.json" --header "Content-Type: application/json" --request POST --verbose http://127.0.0.1:8080/index.php
 ```
 
-## Build Docker
+## Build docker container
 ```sh
-$> docker build --tag luftdata:latest .
+# ensure everything is commited
+$> docker build --tag shadowhunt/luftdata:latest --tag shadowhunt/luftdata:$(git log -1 --format="%at") .
+$> docker push shadowhunt/luftdata:$(git log -1 --format="%at")
+$> docker push shadowhunt/luftdata:latest
 ```
